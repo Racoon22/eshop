@@ -53,7 +53,7 @@ use yii\helpers\Html;
             </div><!--/shipping-->
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center"><?= $category->name ?></h2>
+                    <h2 class="title text-center">Поиск по запросу <?= Html::encode($q) ?></h2>
                     <?php if (!empty($products)) : ?>
                         <?php foreach ($products as $product)  : ?>
                             <div class="col-sm-4">
@@ -63,7 +63,7 @@ use yii\helpers\Html;
                                             <?= Html::img("@web/images/product/{$product->img}", ['alt' => $product->name]); ?>
                                             <h2>$<?= $product->price ?></h2>
                                             <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name ?></a></p>
-                                            <a href="<?= \yii\helpers\Url::to(['card/add', 'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart2">
+                                            <a href="#" class="btn btn-default add-to-cart">
                                                 <i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                         <!--                                    <div class="product-overlay">-->
@@ -91,12 +91,12 @@ use yii\helpers\Html;
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
                         <?php echo \yii\widgets\LinkPager::widget([
                             'pagination' => $pages,
                         ]); ?>
-                        <?php else : ?>
-                        <h2>Товаров здесь пока нет</h2>
+                    <?php else : ?>
+                        <h2>Ничего не найдено</h2>
                     <?php endif; ?>
                 </div>
             </div>
