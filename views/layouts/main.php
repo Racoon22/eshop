@@ -328,7 +328,7 @@ LtAppAsset::register($this);
         'id' => 'card',
         'size' => 'modal-lg',
         'footer' => '<button type="button" class="btn btn-default" data-dismiss= modal>Продолжить покупки</button>
-        <button type="button" class="btn btn-success">Оформить заказ</button>
+        <a href="'.\yii\helpers\Url::to(['card/view']).'" class="btn btn-success">Оформить заказ</a>
         <button type="button" class="btn btn-danger" onclick="clearCard()">Очистить корзину</button>'
 
 ]);
