@@ -28,9 +28,6 @@ class OrderItem extends ActiveRecord
         return 'order_item';
     }
 
-    public function getOrder() {
-        return $this->hasMany(Order::className(), [ 'id' => 'order_id']);
-    }
     /**
      * @inheritdoc
      */

@@ -83,20 +83,6 @@ $this->title = 'My Yii Application';
                         \app\components\MenuWidget::widget(['tpl' => 'menu'])
                         ?>
                     </ul>
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
 
                     <div class="price-range"><!--price-range-->
                         <h2>Price Range</h2>
@@ -110,7 +96,6 @@ $this->title = 'My Yii Application';
                     <div class="shipping text-center"><!--shipping-->
                         <img src="images/home/shipping.jpg" alt=""/>
                     </div><!--/shipping-->
-
                 </div>
             </div>
 
@@ -119,25 +104,19 @@ $this->title = 'My Yii Application';
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">Features Items</h2>
                         <?php foreach ($hits as $hit) :?>
+                        <?php $img = $hit->getImage();?>
                         <div class="col-sm-4">
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <?= Html::img("@web/images/product/{$hit->img}", ['alt' => $hit->name]); ?>
-<!--                                        <img src="images/home/product1.jpg" alt=""/>-->
+                                        <?= Html::img("{$img->getUrl()}", ['alt' => $hit->name]); ?><!--                                        <img src="images/home/product1.jpg" alt=""/>-->
                                         <h2>$<?= $hit->price ?></h2>
+                                        <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $hit->id]) ?>"><?= $hit->name ?></a></p>
+                                        
                                         <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $hit->id]) ?>"<?= $hit->name ?></p>
                                         <a href="<?= \yii\helpers\Url::to(['card/add', 'id' => $hit->id]) ?>" data-id="<?= $hit->id?>" class="btn btn-default add-to-cart"><i
                                                     class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
-<!--                                    <div class="product-overlay">-->
-<!--                                        <div class="overlay-content">-->
-<!--                                            <h2>$56</h2>-->
-<!--                                            <p>Easy Polo Black Edition</p>-->
-<!--                                            <a href="#" class="btn btn-default add-to-cart"><i-->
-<!--                                                        class="fa fa-shopping-cart"></i>Add to cart</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                     <?php if ($hit->new) : ?>
                                         <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']); ?>
                                                 <?php endif; ?>

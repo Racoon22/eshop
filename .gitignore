@@ -14,7 +14,7 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-config/web/php
+config/web.php
 # composer itself is not needed
 composer.phar
 
@@ -31,3 +31,4 @@ tests/_support/_generated
 /web/index.php
 /config/params.php
 /config/db.php
+/config/mailer.php

@@ -123,6 +123,9 @@ a#scrollUp i{
 .fa-twitter:hover  {
 	background:#5BBCEC;
 }
+.fa-vk:hover  {
+    background: #0b3e6f;
+}
 
 .fa-linkedin:hover  {
 	background:#FF4518;
@@ -2397,12 +2400,12 @@ h2.title {
   border: 1px solid#F7F7F0
 }
 
-.btn.btn-primary {
-  background:#FE980F;
-  border: 0 none;
-  border-radius: 0;
-  margin-top: 16px;
-}
+/*.btn.btn-primary {*/
+  /*background:#FE980F;*/
+  /*border: 0 none;*/
+  /*border-radius: 0;*/
+  /*margin-top: 16px;*/
+/*}*/
 
 .blank-arrow {
   position: relative;

@@ -68,7 +68,5 @@ class Order extends ActiveRecord
             'address' => 'Адрес',
         ];
     }
-    public function getOrderItems() {
-        return $this->hasMany(OrderItem::className(), [ 'order_id' => 'id']);
-    }
+
 }

@@ -13,8 +13,19 @@ use yii\base\Model;
 
 class Card extends Model
 {
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     public function addToCard($product, $qty = 1)
     {
+        $mainImg =  $product->getImage();
+
         if (isset($_SESSION['card'][$product->id])) {
             $_SESSION['card'][$product->id]['qty'] = $_SESSION['card'][$product->id]['qty'] + $qty;
         } else {
@@ -22,7 +33,7 @@ class Card extends Model
                 'qty' => $qty,
                 'name' => $product->name,
                 'price' => $product->price,
-                'img' => $product->img,
+                'img' => $mainImg->getUrl('x50'),
             ];
         }
         $_SESSION['card.qty'] = (isset($_SESSION['card.qty'])) ? $_SESSION['card.qty'] + $qty : $qty;

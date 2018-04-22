@@ -22,20 +22,6 @@ use yii\helpers\Html;
                         \app\components\MenuWidget::widget(['tpl' => 'menu'])
                         ?>
                     </ul>
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-                                <li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                                <li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-                                <li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                <li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                <li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                <li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
-                            </ul>
-                        </div>
-                    </div><!--/brands_products-->
                 </div><!--/brands_products-->
 
                 <div class="price-range"><!--price-range-->
@@ -56,11 +42,12 @@ use yii\helpers\Html;
                     <h2 class="title text-center">Поиск по запросу <?= Html::encode($q) ?></h2>
                     <?php if (!empty($products)) : ?>
                         <?php foreach ($products as $product)  : ?>
+                            <?php $img = $product->getImage();?>
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <?= Html::img("@web/images/product/{$product->img}", ['alt' => $product->name]); ?>
+                                            <?= Html::img("{$img->getUrl()}", ['alt' => $product->name]); ?><!--                                        <img src="images/home/product1.jpg" alt=""/>-->
                                             <h2>$<?= $product->price ?></h2>
                                             <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name ?></a></p>
                                             <a href="#" class="btn btn-default add-to-cart">

@@ -84,6 +84,11 @@ class CardController extends AppController
             if ($order->save()) {
                 $this->saveOrderItems($session['card'], $order->id);
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят. Менеджер вскоре свяжется с вами');
+                Yii::$app->mailer->compose('order', compact('session'))
+                    ->setFrom(['antonovsasha22@gmail.com' => 'eshop'])
+                    ->setTo($order->email)
+                    ->setSubject('Заказ')
+                    ->send();
                 $session->remove('card');
                 $session->remove('card.qty');
                 $session->remove('card.sum');
