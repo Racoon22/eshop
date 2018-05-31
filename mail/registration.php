@@ -1,0 +1,1 @@
+Для завершения регистрации перейдите по ссылке http://shop.localhost/site/activate?accessToken=<?php echo $token ?>

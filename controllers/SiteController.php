@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\RegistrationForm;
+use app\models\UserIdentity;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -32,7 +34,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post','get'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -106,7 +108,6 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
             return $this->refresh();
         }
         return $this->render('contact', [
@@ -119,8 +120,26 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionRegistration()
     {
-        return $this->render('about');
+        $model = new RegistrationForm();
+        if ($model->load(Yii::$app->request->post()) && $model->registration(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('registrationSuccess', 'На вашу почту отправленно письмо с дальнейшими инструкциями');
+            return $this->refresh();
+        }
+        return $this->render('registration', compact('model'));
+    }
+
+    public function actionActivate($accessToken)
+    {
+        $model = UserIdentity::findIdentityByAccessToken($accessToken);
+        if ($model) {
+            $model->access_token = null;
+            $model->is_activated = 1;
+            if ($model->save() && Yii::$app->user->login($model)) {
+                Yii::$app->session->setFlash('activateSuccess', 'Поздравляем! Вы зарегистрировались на сайте');
+            }
+        }
+        return $this->render('activate');
     }
 }
