@@ -68,10 +68,14 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = UploadedFile::getInstance($model,'image');
+            if  ($model->image) {
+                $model->upload();
+            }
+            unset($model->image);
+            $model->gallery = UploadedFile::getInstances($model,'gallery');
+            $model->uploadGallery();
             Yii::$app->session->setFlash('success', "Товар {$model->name}" );
-            echo '<pre>';
-            print_r($model);
-            die();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -92,7 +96,6 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             $model->image = UploadedFile::getInstance($model,'image');
             if  ($model->image) {
                 $model->upload();
